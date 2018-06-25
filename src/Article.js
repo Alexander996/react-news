@@ -15,8 +15,10 @@ export default class Article extends Component {
         return (
             <div>
                 <h3>{article.title}</h3>
-                <button onClick={this.toggleOpen}>Open</button>
-                <section>{article.text}</section>
+                <button onClick={this.toggleOpen}>
+                    {this.state.isOpen ? 'Close' : 'Open'}
+                </button>
+                {this.getBody()}
             </div>
         )
     }
@@ -25,5 +27,12 @@ export default class Article extends Component {
         this.setState({
             isOpen: !this.state.isOpen
         })
+    };
+
+    getBody() {
+        if (!this.state.isOpen) return null;
+
+        const {article} = this.props;
+        return <section>{article.text}</section>
     }
 }
