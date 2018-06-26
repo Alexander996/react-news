@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
 import CommentList from '../CommentList'
 import { CSSTransitionGroup } from 'react-transition-group'
+import {deleteArticle} from "../../AC";
 import './style.css'
 
 class Article extends Component {
@@ -24,6 +26,7 @@ class Article extends Component {
                 <button onClick={toggleOpen}>
                     {isOpen ? 'Close' : 'Open'}
                 </button>
+                <button onClick={this.handleDelete}>Delete</button>
                 <CSSTransitionGroup
                     transitionName='article'
                     transitionEnterTimeout={500}
@@ -36,6 +39,11 @@ class Article extends Component {
             </div>
         )
     }
+
+    handleDelete = () => {
+        const {deleteArticle, article} = this.props;
+        deleteArticle(article.id)
+    };
 
     setContainerRef = ref => {
         this.container = ref;
@@ -54,4 +62,4 @@ class Article extends Component {
     }
 }
 
-export default Article
+export default connect(null, {deleteArticle})(Article)
