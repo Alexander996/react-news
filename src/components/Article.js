@@ -12,11 +12,19 @@ class Article extends Component {
         }).isRequired
     };
 
+    componentWillReceiveProps(nextProps) {
+        console.log('receiving props:', nextProps)
+    }
+
+    componentWillMount() {
+        console.log('mounting')
+    }
+
     render() {
         const {article, isOpen, toggleOpen} = this.props;
 
         return (
-            <div>
+            <div ref={this.setContainerRef}>
                 <h3>{article.title}</h3>
                 <button onClick={toggleOpen}>
                     {isOpen ? 'Close' : 'Open'}
@@ -24,6 +32,15 @@ class Article extends Component {
                 {this.getBody()}
             </div>
         )
+    }
+
+    setContainerRef = ref => {
+        this.container = ref;
+        console.log('REF:', ref)
+    };
+
+    componentDidMount() {
+        console.log('mounted')
     }
 
     getBody() {
