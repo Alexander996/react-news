@@ -1,7 +1,7 @@
 import {articles as defaultArticles} from '../fixtures'
 import {DELETE_ARTICLE} from '../constans'
 
-export default (articleState = defaultArticles, action) => {
+export default (articleState=defaultArticles, action) => {
     const {type, payload} = action;
     switch (type) {
         case DELETE_ARTICLE:

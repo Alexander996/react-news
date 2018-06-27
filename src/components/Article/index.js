@@ -23,6 +23,7 @@ class Article extends Component {
         return (
             <div ref={this.setContainerRef}>
                 <h3>{article.title}</h3>
+                <p>{new Date(article.date).toDateString()}</p>
                 <button onClick={toggleOpen}>
                     {isOpen ? 'Close' : 'Open'}
                 </button>
