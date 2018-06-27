@@ -32,7 +32,7 @@ class CommentList extends Component {
         if (!isOpen) return null;
         if (!comments.length) return <p>No comments yet</p>;
 
-        const commentElements = comments.map((comment) => <li key={comment.id}><Comment comment={comment}/></li>);
+        const commentElements = comments.map((id) => <li key={id}><Comment id={id}/></li>);
         return (
             <div>
                 <ul>
