@@ -47,7 +47,7 @@ class Article extends Component {
     };
 
     setContainerRef = ref => {
-        this.container = ref;
+        // this.container = ref;
     };
 
     getBody() {
@@ -57,7 +57,7 @@ class Article extends Component {
         return (
             <section>
                 <p>{article.text}</p>
-                <CommentList comments={article.comments} />
+                <CommentList article={article} />
             </section>
         )
     }
