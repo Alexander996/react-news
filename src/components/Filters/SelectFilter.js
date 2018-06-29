@@ -25,5 +25,5 @@ class SelectFilter extends React.Component {
 }
 
 export default connect(state => ({
-    articles: mapToArr(state.articles)
+    articles: mapToArr(state.articles.entities)
 }), {changeSelection})(SelectFilter)
