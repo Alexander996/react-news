@@ -22,3 +22,5 @@ yarn-error.log*
 
 # WebStorm
 /.idea
+
+/simple_api/node_modules
