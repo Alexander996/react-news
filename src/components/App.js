@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Articles from './routes/Articles'
 import NotFound from './routes/NotFound'
+import CommentsPage from './routes/CommentsPage'
 import UserForm from './UserForm'
 import Filters from './Filters'
 import Counter from './Counter'
@@ -22,6 +23,7 @@ export default class App extends Component {
                         <Route path='/counter' component={Counter}/>
                         <Route path='/filters' component={Filters}/>
                         <Route path='/articles' component={Articles}/>
+                        <Route path='/comments/:page' component={CommentsPage}/>
                         <Route path='*' component={NotFound}/>
                     </Switch>
                 </div>
