@@ -3,27 +3,31 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import CommentList from '../CommentList'
 import { CSSTransitionGroup } from 'react-transition-group'
-import {deleteArticle, loadArticle} from "../../AC";
+import {deleteArticle, loadArticle} from '../../AC';
 import Loader from '../Loader'
 import './style.css'
 
 class Article extends Component {
     static propTypes = {
-        article: PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
-            text: PropTypes.string
-        }).isRequired,
+        id: PropTypes.string.isRequired,
         isOpen: PropTypes.bool,
-        toggleOpen: PropTypes.func
+        toggleOpen: PropTypes.func,
+        //from connect
+        article: PropTypes.shape({
+            id: PropTypes.string,
+            title: PropTypes.string,
+            text: PropTypes.string
+        })
     };
 
-    componentWillReceiveProps({isOpen, loadArticle, article}) {
-        if (isOpen && !article.text && !article.loading) loadArticle(article.id)
+    componentDidMount() {
+        const {loadArticle, article, id} = this.props;
+        if (!article || (!article.text && !article.loading)) loadArticle(id)
     }
 
     render() {
         const {article, isOpen, toggleOpen} = this.props;
+        if (!article) return null;
 
         return (
             <div ref={this.setContainerRef}>
@@ -70,4 +74,6 @@ class Article extends Component {
     }
 }
 
-export default connect(null, {deleteArticle, loadArticle})(Article)
+export default connect((state, ownProps) => ({
+    article: state.articles.entities.get(ownProps.id)
+}), {deleteArticle, loadArticle})(Article)
