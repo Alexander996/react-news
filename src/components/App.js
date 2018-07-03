@@ -5,12 +5,14 @@ import CommentsPage from './routes/CommentsPage'
 import UserForm from './UserForm'
 import Filters from './Filters'
 import Counter from './Counter'
-import {BrowserRouter as Router, Switch, Route, Redirect, NavLink} from 'react-router-dom'
+import {Switch, Route, NavLink} from 'react-router-dom'
+import {ConnectedRouter as Router} from 'react-router-redux'
+import history from '../history'
 
 export default class App extends Component {
     render() {
         return (
-            <Router>
+            <Router history={history}>
                 <div>
                     <div>
                         <h2>Main menu</h2>
@@ -24,7 +26,6 @@ export default class App extends Component {
                         <Route path='/filters' component={Filters}/>
                         <Route path='/articles' component={Articles}/>
                         <Route path='/comments' component={CommentsPage}/>
-                        {/*<Redirect from='/comments' to='/comments/1'/>*/}
                         <Route path='*' component={NotFound}/>
                     </Switch>
                 </div>
