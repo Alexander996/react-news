@@ -8,6 +8,12 @@ import {connect} from 'react-redux'
 import Loader from './Loader';
 
 class CommentList extends Component {
+    static contextTypes = {
+        store: PropTypes.object,
+        router: PropTypes.object,
+        user: PropTypes.string
+    };
+
     static defaultProps = {
         comments: []
     };
@@ -30,6 +36,7 @@ class CommentList extends Component {
 
         return (
             <div>
+                <h3>User: {this.context.user}</h3>
                 <button onClick={toggleOpen}>
                     {isOpen ? 'Hide comments' : 'Show comments'}
                 </button>
@@ -62,4 +69,4 @@ class CommentList extends Component {
     }
 }
 
-export default connect(null, {loadArticleComments})(toggleOpen(CommentList))
+export default connect(null, {loadArticleComments}, null, {pure: false})(toggleOpen(CommentList))

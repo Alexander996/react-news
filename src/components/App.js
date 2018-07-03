@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import Articles from './routes/Articles'
 import NotFound from './routes/NotFound'
 import CommentsPage from './routes/CommentsPage'
@@ -10,6 +11,20 @@ import {ConnectedRouter as Router} from 'react-router-redux'
 import history from '../history'
 
 export default class App extends Component {
+    static childContextTypes = {
+        user: PropTypes.string
+    };
+
+    state = {
+        username: ''
+    };
+
+    getChildContext() {
+        return {
+            user: this.state.username
+        }
+    }
+
     render() {
         return (
             <Router history={history}>
@@ -20,7 +35,7 @@ export default class App extends Component {
                         <div><NavLink activeStyle={{color: 'red'}} to='/filters'>Filters</NavLink></div>
                         <div><NavLink activeStyle={{color: 'red'}} to='/articles'>Articles</NavLink></div>
                     </div>
-                    <UserForm/>
+                    <UserForm value={this.state.username} onChange={this.handleUserChange}/>
                     <Switch>
                         <Route path='/counter' component={Counter}/>
                         <Route path='/filters' component={Filters}/>
@@ -32,4 +47,6 @@ export default class App extends Component {
             </Router>
         )
     }
+
+    handleUserChange = (username) => this.setState({username})
 }
